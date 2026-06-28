@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Abeng Online - Remote Project Management Simplified</title>
+<meta name="description" content="Abeng Online: Manage and track remote projects effortlessly for distributed tech teams across Southeast Asia and Australia." />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --clr-primary: #0052cc;
+    --clr-primary-dark: #003d99;
+    --clr-accent: #00aaff;
+    --clr-bg: #f9fbfd;
+    --clr-text: #222;
+    --clr-grey-light: #e6ecf5;
+    --clr-grey-mid: #99aabb;
+    --clr-white: #fff;
+    --transition-speed: 0.3s;
+    --font-family: 'Inter', sans-serif;
+  }
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0; background: var(--clr-bg); font-family: var(--font-family); color: var(--clr-text); line-height: 1.6;
+  }
+  a {
+    color: var(--clr-primary);
+    text-decoration: none;
+    transition: color var(--transition-speed);
+  }
+  a:hover, a:focus {
+    color: var(--clr-primary-dark);
+  }
+  header {
+    background: var(--clr-white);
+    box-shadow: 0 2px 5px rgb(0 0 0 / 0.1);
+    position: sticky;
+    top: 0; z-index: 100;
+  }
+  .container {
+    max-width: 1100px; margin: 0 auto; padding: 0 1rem;
+  }
+  nav {
+    display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 0;
+  }
+  nav h1 {
+    font-weight: 700; font-size: 1.5rem; color: var(--clr-primary);
+  }
+  nav ul {
+    list-style: none; margin: 0; padding: 0; display: flex; gap: 2rem;
+  }
+  nav li {
+    font-weight: 600;
+  }
+  nav a:focus-visible {
+    outline: 2px dashed var(--clr-primary);
+    outline-offset: 3px;
+  }
+  main {
+    margin-top: 2rem;
+  }
+  section {
+    margin-bottom: 4rem;
+  }
+  h2.section-title {
+    font-size: 2rem;
+    color: var(--clr-primary);
+    margin-bottom: 1rem;
+    font-weight: 700;
+    border-left: 6px solid var(--clr-accent);
+    padding-left: 0.5rem;
+  }
+
+  /* Hero */
+  #overview {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 2rem;
+  }
+  #overview .text {
+    flex: 1 1 350px;
+  }
+  #overview h2 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+  }
+  #overview p {
+    font-size: 1.15rem; color: #3a3a3a; margin-bottom: 1rem;
+  }
+  #overview .cta-btn {
+    background-color: var(--clr-primary);
+    color: var(--clr-white);
+    font-weight: 700;
+    padding: 0.75rem 1.75rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: background-color var(--transition-speed);
+  }
+  #overview .cta-btn:hover,
+  #overview .cta-btn:focus {
+    background-color: var(--clr-primary-dark);
+  }
+  #overview .demo-container {
+    flex: 1 1 350px;
+    background: var(--clr-white);
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgb(0 82 204 / 0.15);
+    padding: 20px;
+  }
+  /* Animated project demo for #overview */
+  #demo-canvas {
+    width: 100%; height: 240px;
+    border-radius: 8px;
+    background: #eef6ff;
+    display: block;
+  }
+
+  /* Features */
+  #features .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
+    gap: 1.8rem;
+  }
+  .feature {
+    background: var(--clr-white);
+    padding: 1.6rem;
+    border-radius: 8px;
+    box-shadow: 0 1px 6px rgb(0 0 0 / 0.07);
+    transition: box-shadow var(--transition-speed);
+    cursor: default;
+  }
+  .feature:hover, .feature:focus-within {
+    box-shadow: 0 8px 20px rgb(0 0 0 / 0.12);
+  }
+  .feature h3 {
+    color: var(--clr-primary);
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+  }
+  .feature p {
+    color: #555;
+    font-size: 0.95rem;
+  }
+
+  /* Testimonials */
+  #testimonials .testimonial-list {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 1.5rem;
+  }
+  #testimonials .testimonial {
+    flex: 0 0 280px;
+    background: var(--clr-white);
+    box-shadow: 0 3px 12px rgb(0 0 0 / 0.07);
+    border-radius: 12px;
+    padding: 1.6rem;
+    transition: transform 0.3s ease;
+  }
+  #testimonials .testimonial:focus-within,
+  #testimonials .testimonial:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 8px 20px rgb(0 0 0 / 0.12);
+  }
+  .testimonial p {
+    font-style: italic;
+    color: #444;
+    font-size: 0.95rem;
+  }
+  .testimonial cite {
+    display: block;
+    margin-top: 1rem;
+    font-weight: 600;
+    color: var(--clr-primary-dark);
+    font-size: 0.9rem;
+  }
+
+  /* Pricing */
+  #pricing .plans {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+  }
+  .plan {
+    background: var(--clr-white);
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgb(0 0 0 / 0.07);
+    padding: 2rem 1.8rem;
+    flex: 1 1 280px;
+    max-width: 320px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: box-shadow var(--transition-speed);
+  }
+  .plan:hover,
+  .plan:focus-within {
+    box-shadow: 0 8px 25px rgb(0 0 0 / 0.15);
+  }
+  .plan h3 {
+    color: var(--clr-primary);
+    margin-bottom: 0.3rem;
+  }
+  .plan .price {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--clr-accent);
+    margin-bottom: 1.1rem;
+  }
+  .plan ul {
+    list-style: none;
+    margin: 0 0 1.5rem 0;
+    padding: 0;
+    width: 100%;
+    color: #444;
+  }
+  .plan ul li {
+    margin-bottom: 0.6rem;
+    font-size: 0.95rem;
+    padding-left: 1.2rem;
+    position: relative;
+  }
+  .plan ul li::before {
+    content: "✔";
+    position: absolute;
+    left: 0;
+    color: var(--clr-accent);
+  }
+  .plan button {
+    margin-top: auto;
+    background-color: var(--clr-primary);
+    color: var(--clr-white);
+    border: none;
+    border-radius: 6px;
+    padding: 0.75rem 1.6rem;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+    font-size: 1.05rem;
+    transition: background-color var(--transition-speed);
+  }
+  .plan button:hover,
+  .plan button:focus {
+    background-color: var(--clr-primary-dark);
+  }
+  /* Lead Collection & Registration */
+  #signup-section {
+    background: var(--clr-primary);
+    color: var(--clr-white);
+    border-radius: 12px;
+    padding: 2rem 1.5rem;
+    max-width: 700px;
+    margin: 0 auto 4rem auto;
+    box-shadow: 0 8px 30px rgb(0 82 204 / 0.3);
+  }
+  #signup-section h2 {
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+  }
+  #signup-section p {
+    margin-bottom: 1.6rem;
+    font-size: 1.1rem;
+  }
+  form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: flex-end;
+  }
+  form label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+  }
+  input[type="email"],
+  input[type="text"] {
+    padding: 0.55rem 0.8rem;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    width: 100%;
+  }
+  #register-form input, #update-form input {
+    max-width: 280px;
+  }
+  .form-group {
+    flex: 1 1 180px;
+  }
+  button[type="submit"], button.update-btn {
+    background-color: var(--clr-accent);
+    color: var(--clr-white);
+    border: none;
+    border-radius: 6px;
+    padding: 0.65rem 1.4rem;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color var(--transition-speed);
+  }
+  button[type="submit"]:hover, button[type="submit"]:focus,
+  button.update-btn:hover, button.update-btn:focus {
+    background-color: #008bd9;
+  }
+  .form-status {
+    margin-top: 0.5rem;
+    font-weight: 600;
+  }
+  /* Update Email smaller form */
+  #update-section {
+    max-width: 480px;
+    margin: 0 auto 3rem auto;
+    background: var(--clr-white);
+    padding: 1.4rem 1.6rem 1.8rem 1.6rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 16px rgb(0 0 0 / 0.08);
+  }
+  #update-section h3 {
+    color: var(--clr-primary);
+    font-weight: 700;
+    margin-bottom: 1rem;
+    font-size: 1.4rem;
+  }
+  #update-form {
+    display: flex; flex-wrap: wrap; gap: 1rem; align-items: flex-end;
+  }
+  #update-form .form-group {
+    flex: 1 1 180px;
+  }
+  /* Responsive */
+  @media (max-width: 720px){
+    #overview {
+      flex-direction: column;
+    }
+    nav ul {
+      gap: 1rem;
+    }
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="container" role="banner">
+    <nav aria-label="Primary navigation">
+      <h1>Abeng Online</h1>
+      <ul>
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#testimonials">Testimonials</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#signup-section">Try It Now</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<main>
+  <section id="overview" class="container" tabindex="-1" aria-label="Overview of Abeng Online">
+    <div class="text">
+      <h2>Remote Project Management Made Easy</h2>
+      <p>Abeng Online empowers team leads and project managers in Southeast Asia and Australia to seamlessly manage distributed tech projects with real-time tracking, collaboration, and intuitive workflows.</p>
+      <button class="cta-btn" type="button" onclick="window.location='#signup-section'">Start Your Free Trial</button>
+    </div>
+    <div class="demo-container" aria-label="Live demo of Abeng Online software tool">
+      <canvas id="demo-canvas" aria-hidden="true"></canvas>
+    </div>
+  </section>
+
+  <section id="features" class="container" tabindex="-1" aria-label="Features and benefits of Abeng Online">
+    <h2 class="section-title">Features & Benefits</h2>
+    <div class="features-grid">
+      <article class="feature" tabindex="0" aria-describedby="feature1-desc">
+        <h3>Real-Time Collaboration</h3>
+        <p id="feature1-desc">Instantly communicate and update tasks with your distributed team, reducing delays and miscommunication.</p>
+      </article>
+      <article class="feature" tabindex="0" aria-describedby="feature2-desc">
+        <h3>Robust Task Tracking</h3>
+        <p id="feature2-desc">Monitor task progress, milestones, and deadlines with dynamic dashboards customized for your projects.</p>
+      </article>
+      <article class="feature" tabindex="0" aria-describedby="feature3-desc">
+        <h3>Insightful Analytics</h3>
+        <p id="feature3-desc">Gain actionable insights with performance metrics and work patterns to optimize team productivity.</p>
+      </article>
+      <article class="feature" tabindex="0" aria-describedby="feature4-desc">
+        <h3>Multi-region Support</h3>
+        <p id="feature4-desc">Designed for teams spanning Southeast Asia to Australia with timezone and language support to match.</p>
+      </article>
+      <article class="feature" tabindex="0" aria-describedby="feature5-desc">
+        <h3>Integrations & API</h3>
+        <p id="feature5-desc">Easily connect with your favorite tools and automate workflows for smoother project delivery.</p>
+      </article>
+      <article class="feature" tabindex="0" aria-describedby="feature6-desc">
+        <h3>Secure & Reliable</h3>
+        <p id="feature6-desc">Built with enterprise-grade security and 99.9% uptime to keep your data safe and accessible anytime.</p>
+      </article>
+    </div>
+  </section>
+
+  <section id="testimonials" class="container" tabindex="-1" aria-label="Customer testimonials and case studies">
+    <h2 class="section-title">What Our Clients Say</h2>
+    <div class="testimonial-list" role="list">
+      <article class="testimonial" tabindex="0" role="listitem" aria-label="Testimonial from Lina, Tech Lead">
+        <p>"Abeng Online transformed how our remote teams work and communicate. We no longer lose track of tasks even across different countries."</p>
+        <cite>— Lina, Tech Lead, Jakarta</cite>
+      </article>
+      <article class="testimonial" tabindex="0" role="listitem" aria-label="Testimonial from Marcus, Project Manager">
+        <p>"The analytics dashboard is a game-changer. It helped us identify bottlenecks quickly and keep our projects on schedule."</p>
+        <cite>— Marcus, Project Manager, Sydney</cite>
+      </article>
+      <article class="testimonial" tabindex="0" role="listitem" aria-label="Testimonial from Arjun, CTO">
+        <p>"Integration with our other systems was seamless. Our distributed team feels more connected than ever before."</p>
+        <cite>— Arjun, CTO, Melbourne</cite>
+      </article>
+    </div>
+  </section>
+
+  <section id="pricing" class="container" tabindex="-1" aria-label="Pricing plans for Abeng Online">
+    <h2 class="section-title">Pricing Plans</h2>
+    <div class="plans" role="list">
+      <article class="plan" tabindex="0" role="listitem" aria-labelledby="plan-basic">
+        <h3 id="plan-basic">Basic</h3>
+        <p class="price">Free</p>
+        <ul>
+          <li>Up to 5 users</li>
+          <li>Basic task tracking</li>
+          <li>Standard dashboards</li>
+          <li>Email support</li>
+        </ul>
+        <button type="button" aria-label="Choose Basic plan" onclick="location.href='#signup-section'">Get Started</button>
+      </article>
+      <article class="plan" tabindex="0" role="listitem" aria-labelledby="plan-pro">
+        <h3 id="plan-pro">Pro</h3>
+        <p class="price">$19/user/mo</p>
+        <ul>
+          <li>Unlimited users</li>
+          <li>Advanced collaboration features</li>
+          <li>Custom analytics & reports</li>
+          <li>Priority email & chat support</li>
+        </ul>
+        <button type="button" aria-label="Choose Pro plan" onclick="location.href='#signup-section'">Try Pro</button>
+      </article>
+      <article class="plan" tabindex="0" role="listitem" aria-labelledby="plan-enterprise">
+        <h3 id="plan-enterprise">Enterprise</h3>
+        <p class="price">Custom Pricing</p>
+        <ul>
+          <li>All Pro features</li>
+          <li>Dedicated account manager</li>
+          <li>Custom integrations & onboarding</li>
+          <li>24/7 enterprise support</li>
+        </ul>
+        <button type="button" aria-label="Contact for Enterprise plan" onclick="window.location='mailto:sales@abengonline.com?subject=Enterprise Pricing Inquiry'">Contact Us</button>
+      </article>
+    </div>
+  </section>
+
+  <section id="signup-section" tabindex="-1" aria-label="Sign up to try Abeng Online">
+    <div class="container">
+      <h2>Try Abeng Online Today</h2>
+      <p>Sign up now for a free trial and start managing your remote projects more efficiently.</p>
+      <form id="register-form" novalidate aria-describedby="register-status">
+        <div class="form-group">
+          <label for="register-name">Full Name</label>
+          <input type="text" id="register-name" name="name" placeholder="Your full name" required autocomplete="name" />
+        </div>
+        <div class="form-group">
+          <label for="register-email">Email Address</label>
+          <input type="email" id="register-email" name="email" placeholder="email@example.com" required autocomplete="email" />
+        </div>
+        <button type="submit" aria-label="Submit registration form">Sign Up</button>
+        <p class="form-status" role="alert" id="register-status" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+
+  <section id="update-section" tabindex="-1" aria-label="Update registered email address">
+    <div class="container">
+      <h3>Update Your Email</h3>
+      <form id="update-form" novalidate aria-describedby="update-status">
+        <div class="form-group">
+          <label for="old-email">Current Email</label>
+          <input type="email" id="old-email" name="oldEmail" placeholder="current-email@example.com" required autocomplete="email" />
+        </div>
+        <div class="form-group">
+          <label for="new-email">New Email</label>
+          <input type="email" id="new-email" name="newEmail" placeholder="new-email@example.com" required autocomplete="email" />
+        </div>
+        <button class="update-btn" type="submit" aria-label="Submit email update form">Update Email</button>
+        <p class="form-status" role="alert" id="update-status" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+</main>
+<script>
+  const siteId = new URLSearchParams(window.location.search).get('id') || '';
+
+  async function registerUser(email, name) {
+    try {
+      const res = await fetch('https://techtravelthink.app.n8n.cloud/webhook/user-register', {
+        method: 'POST', headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ action: 'register', email, name, websiteId: siteId, source: window.location.href })
+      });
+      const data = await res.json();
+      return data.success ? 'Registered successfully!' : (data.message || 'Registration failed');
+    } catch(e) { return 'Network error. Please try again.'; }
+  }
+
+  async function updateUserEmail(oldEmail, newEmail) {
+    try {
+      const res = await fetch('https://techtravelthink.app.n8n.cloud/webhook/user-register', {
+        method: 'POST', headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ action: 'update', oldEmail, newEmail, websiteId: siteId })
+      });
+      const data = await res.json();
+      return data.success ? 'Email updated successfully!' : (data.message || 'Update failed');
+    } catch(e) { return 'Network error. Please try again.'; }
+  }
+
+  // Handle registration form
+  const regForm = document.getElementById('register-form');
+  const regStatus = document.getElementById('register-status');
+  regForm.addEventListener('submit', async e => {
+    e.preventDefault();
+    regStatus.textContent = '';
+    const name = regForm.name.value.trim();
+    const email = regForm.email.value.trim();
+    if (!name || !email) {
+      regStatus.textContent = 'Please enter your name and a valid email.';
+      return;
+    }
+    regStatus.textContent = 'Registering...';
+    const msg = await registerUser(email, name);
+    regStatus.textContent = msg;
+    if (msg === 'Registered successfully!') {
+      regForm.reset();
+    }
+  });
+
+  // Handle update email form
+  const updForm = document.getElementById('update-form');
+  const updStatus = document.getElementById('update-status');
+  updForm.addEventListener('submit', async e => {
+    e.preventDefault();
+    updStatus.textContent = '';
+    const oldEmail = updForm.oldEmail.value.trim();
+    const newEmail = updForm.newEmail.value.trim();
+    if (!oldEmail || !newEmail) {
+      updStatus.textContent = 'Please enter both current and new email addresses.';
+      return;
+    }
+    updStatus.textContent = 'Updating...';
+    const msg = await updateUserEmail(oldEmail, newEmail);
+    updStatus.textContent = msg;
+    if (msg === 'Email updated successfully!') {
+      updForm.reset();
+    }
+  });
+
+  // Animated demo on canvas - simulating project task cards moving horizontally
+  (() => {
+    const canvas = document.getElementById('demo-canvas');
+    if (!canvas.getContext) return;
+    const ctx = canvas.getContext('2d');
+    let width, height, ratio;
+
+    const tasks = [];
+    const colors = ['#0052cc', '#00aaff', '#004080', '#0077cc', '#0088dd'];
+    function setupSize() {
+      ratio = window.devicePixelRatio || 1;
+      width = canvas.clientWidth * ratio;
+      height = canvas.clientHeight * ratio;
+      canvas.width = width;
+      canvas.height = height;
+      ctx.scale(ratio, ratio);
+    }
+
+    function createTask(x, y, w, h, color, text) {
+      return { x, y, w, h, color, text, vx: 0.6 + Math.random() * 0.8 };
+    }
+
+    function initTasks() {
+      tasks.length = 0;
+      const rowHeight = 50;
+      const verticalPositions = [40, 110, 180, 250];
+      for (let i=0; i<10; i++) {
+        const w = 130 + Math.random()*60;
+        const h = 38;
+        const y = verticalPositions[i%verticalPositions.length];
+        const x = -w - (i*120);
+        tasks.push(createTask(x, y, w, h, colors[i%colors.length], `Task #${i+1}`));
+      }
+    }
+
+    function drawRoundedRect(x,y,w,h,r,c) {
+      ctx.fillStyle = c;
+      ctx.beginPath();
+      ctx.moveTo(x+r,y);
+      ctx.lineTo(x+w-r,y);
+      ctx.quadraticCurveTo(x+w,y,x+w,y+r);
+      ctx.lineTo(x+w,y+h-r);
+      ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);
+      ctx.lineTo(x+r,y+h);
+      ctx.quadraticCurveTo(x,y+h,x,y+h-r);
+      ctx.lineTo(x,y+r);
+      ctx.quadraticCurveTo(x,y,x+r,y);
+      ctx.fill();
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, width, height);
+      tasks.forEach(t => {
+        drawRoundedRect(t.x, t.y, t.w, t.h, 10, t.color);
+        ctx.fillStyle = '#fff';
+        ctx.font = '600 14px Inter, sans-serif';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(t.text, t.x + 12, t.y + t.h/2);
+        t.x += t.vx;
+        if (t.x > canvas.clientWidth + 30) {
+          t.x = -t.w - Math.random()*150;
+        }
+      });
+      requestAnimationFrame(draw);
+    }
+
+    function init() {
+      setupSize();
+      initTasks();
+      draw();
+    }
+    window.addEventListener('resize', () => {
+      setupSize();
+    });
+    init();
+  })();
+</script>
+</body>
+</html>
